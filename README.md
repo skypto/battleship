@@ -1,1 +1,3 @@
 # battleship
+
+* Created empty boards.
