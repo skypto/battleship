@@ -19,6 +19,11 @@ Petrol Boat - 2 hits
 */
 
 
+// if we hit, we wand to add 5pts. 
+// If we miss, we deduct one.
+
+
+
 //when you click start game
 var gameState = [
 [null,null,null,null,null,null,null,null,null,null],
@@ -56,18 +61,23 @@ function createGameBoard(){
 function play(cell) {
   var col = cell.getAttribute("col");
   var row = cell.parentElement.getAttribute("row");
+  var score = Number(document.getElementById("score").innerHTML);
+
 
   if (gameState[row][col] == null) {
     if (shipData[row][col] == "X") {
       alert("Hit!");
       gameState[row][col] = "X";
+      score +=5;
     } else {
       alert("You hit water!");
       gameState[row][col] = "O";
+      score -=1;
     }
   } else {
     alert("You've already tried this one!");
   }
+  document.getElementById("score").innerHTML = score;
   populateGameBoard(gameState);
 }
 
@@ -84,6 +94,9 @@ function populateGameBoard(gameState) {
     }
   }
 }
+
+
+
 
 window.onload = function(){
 	createGameBoard();
