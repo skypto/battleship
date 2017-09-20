@@ -43,12 +43,32 @@ function createGameBoard(){
 		for (var j=0; j< 10; j++){
 			var tableData = document.createElement("td");
 			tableData.setAttribute("col",j);
+			tableData.setAttribute("onclick","play(this)");
 			//display whatever value in the table (x)
 			tableData.innerHTML = shipData[i][j];
 			tableRow.appendChild(tableData);
 		}
 		gameBoard.appendChild(tableRow);
 	}
+}
+
+
+function play(cell) {
+  var col = cell.getAttribute("col");
+  var row = cell.parentElement.getAttribute("row");
+
+  if (gameState[row][col] == null) {
+    if (shipData[row][col] == "X") {
+      alert("Hit!");
+      gameState[row][col] = "X";
+    } else {
+      alert("You hit water!");
+      gameState[row][col] = "O";
+    }
+  } else {
+    alert("You've already tried this one!");
+  }
+  populateGameBoard(gameState);
 }
 
 
